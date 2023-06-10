@@ -79,19 +79,19 @@ crc32 (unsigned int crc, unsigned char *buf, int len)
 unsigned char
 inout (FILE *fp_in, FILE *fp_out)
 {
-  int val, out;
+  int val;
 
   if ((val = fgetc(fp_in)) == EOF)
   {
-    fprintf (stderr, "%s: %s too short\n", prog, file_in);
-    exit (1);
+    fprintf(stderr, "%s: %s too short\n", prog, file_in);
+    exit(1);
   }
   else
   {
-    if ((out = fputc(val, fp_out)) == EOF)
+    if (fputc(val, fp_out) == EOF)
     {
-      fprintf (stderr, "%s: %s couln't be written\n", prog, file_out);
-      exit (1);
+      fprintf(stderr, "%s: %s couln't be written\n", prog, file_out);
+      exit(1);
     }
   }
 
@@ -105,8 +105,8 @@ inonly (FILE *fp_in)
 
   if ((val = fgetc(fp_in)) == EOF)
   {
-    fprintf (stderr, "%s: %s too short\n", prog, file_in);
-    exit (1);
+    fprintf(stderr, "%s: %s too short\n", prog, file_in);
+    exit(1);
   }
 
   return ((unsigned char)val);
@@ -115,14 +115,13 @@ inonly (FILE *fp_in)
 unsigned char
 outonly (unsigned char c, FILE *fp_out)
 {
-  int out;
   int val;
 
   val = (int)c;
-  if ((out = fputc(val, fp_out)) == EOF)
+  if (fputc(val, fp_out) == EOF)
   {
-    fprintf (stderr, "%s: %s couln't be written\n", prog, file_out);
-    exit (1);
+    fprintf(stderr, "%s: %s couln't be written\n", prog, file_out);
+    exit(1);
   }
 
   return ((unsigned char)val);
@@ -131,13 +130,9 @@ outonly (unsigned char c, FILE *fp_out)
 int main (int argc, char * argv[]) {
   FILE *fp_in;
   FILE *fp_out;
-  int val;
   unsigned char c;
   unsigned char b;
-  unsigned int csum = 0;
-  unsigned int crc = 0;
   char chnk[5];
-  int l;
   int i;
 
   if (argc < 3)
@@ -167,6 +162,7 @@ int main (int argc, char * argv[]) {
   // copy PNG header
   for (i = 0; i < 8; i++)
   {
+    int val;
     if ((val = fgetc(fp_in)) == EOF)
     {
       fprintf(stderr, "%s: %s too short\n", argv[0], argv[1]);
@@ -189,7 +185,7 @@ int main (int argc, char * argv[]) {
   do
   {
     // get chunk size
-    l = 0;
+    int l = 0;
     for (i = 0; i < 4; i++)
     {
       c = inout(fp_in, fp_out);
@@ -197,7 +193,7 @@ int main (int argc, char * argv[]) {
     }
 
     // get chunk name
-    crc = 0;
+    unsigned int crc = 0;
     strcpy(chnk, "");
     for (i = 0; i < 4; i++)
     {
@@ -217,7 +213,7 @@ int main (int argc, char * argv[]) {
     }
 
     // copy checksum
-    csum = 0;
+    unsigned int csum = 0;
     for (i = 0; i < 4; i++)
     {
       c = inonly(fp_in);
