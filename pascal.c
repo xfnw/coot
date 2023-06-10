@@ -2,8 +2,8 @@
 
 static char *margin = "   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .";
 
-long unsigned int factorial(int x){
-    long unsigned int result = 1;
+long long unsigned int factorial(int x){
+    long long unsigned int result = 1;
 
     if (x == 0 || x == 1)
         return result;
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
         printf("%02d%s", i, margin+(scale*i)+offset);
 
         for(int j = 1; j <= i; j++)
-            printf("% 6ld", (long)pascal_triangle_nth(i, j));
+            printf("% 6d", (int)pascal_triangle_nth(i, j));
 
         printf("\n");
     }
