@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-const char *margin = "   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .";
+static char *margin = "   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .";
 
 long unsigned int factorial(int x){
     long unsigned int result = 1;
@@ -22,9 +22,17 @@ long unsigned int pascal_triangle_nth(int row, int x){
 }
 
 
-int main(){
+int main(int argc, char *argv[]){
+    int scale = 3;
+    int offset = 0;
+
+    if (argc > 1 && *argv[1] == 's') {
+        scale = 2;
+	offset = 20;
+    }
+
     for(int i = 1; i <= 20; i++){
-        printf("%02d%s", i, margin+(3*i));
+        printf("%02d%s", i, margin+(scale*i)+offset);
 
         for(int j = 1; j <= i; j++)
             printf("% 6ld", (long)pascal_triangle_nth(i, j));
