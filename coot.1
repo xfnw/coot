@@ -1,0 +1,103 @@
+.Dd June 10th, 2023
+.Dt coot 1
+.Os
+.
+.Sh NAME
+.Nm crc16 ,
+.Nm pascal ,
+.Nm pngcsum
+.Nd random little c utilities
+.
+.Sh SYNOPSIS
+.Nm crc16
+.Op Ar format
+.
+.Nm pascal
+.Op Cm s
+.
+.Nm pngcsum
+.Ar filein
+.Ar fileout
+.
+.Sh DESCRIPTION
+random little utilities in C.
+
+the
+.Nm crc16
+utility runs a
+.Ql CRC16-XMODEM
+cyclic-redundancy check on
+.Pa stdin
+and sends the checksum to
+.Pa stdout .
+
+the options are as follows:
+.Bl -tag -width Ds
+.It Ar format
+sets the format to output the check as.
+if set to an unknown value,
+.Nm crc16
+will output a preview of output formats.
+
+possible values include:
+.Bl -inset
+.It Cm b
+output as raw binary such that, if appended to the input
+and checked again, will produce a checksum of 0.
+regardless of host architecture, this will output in
+Big-Endian byte order.
+.It Cm d
+output as as signed 16-bit decimal.
+.It Cm D
+output as unsigned decimal.
+.It Cm x
+output as 16-bit hex, including leading zeros.
+.El
+
+if left unspecified, format
+.Cm x
+will be used.
+.El
+
+the
+.Nm pascal
+utility outputs a text representation of Pascal's Triangle.
+
+the options are as follows:
+.Bl -tag -width Ds
+.It Cm s
+shrink alignment padding a bit, to help the first few lines fit
+on smaller screens.
+this however cannot shrink the last few lines
+that already have very little padding.
+.El
+
+the
+.Nm pngcsum
+utility fixes checksums of png files,
+allowing partial recovery of mildly-corrupted images.
+
+the options are as follows:
+.Bl -tag -width Ds
+.It Ar filein
+the path of the input png file to correct
+.It Ar fileout
+the path to output the corrected png file
+.Ed
+.
+.Sh BUGS
+none :3
+
+the term
+.Ql checksum
+is used throughout this manual to refer to the output of a crc,
+although this is technically incorrect.
+.
+.Sh AUTHORS
+.An xfnw Aq Mt xfnw@riseup.net
+.
+.Sh HISTORY
+.Nm pngcsum
+was adapted from a c file floating around in various git
+repositories for CTF challenges and websites.
+it is unclear who wrote the original or where it came from.
