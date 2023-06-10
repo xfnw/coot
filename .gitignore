@@ -1,5 +1,6 @@
 *.o
 *.bak
+*.png
 crc16
 pngcsum
 pascal

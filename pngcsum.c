@@ -95,7 +95,7 @@ inout (FILE *fp_in, FILE *fp_out)
     }
   }
 
-  return ((unsigned char) val);
+  return ((unsigned char)val);
 }
 
 unsigned char
@@ -109,7 +109,7 @@ inonly (FILE *fp_in)
     exit (1);
   }
 
-  return ((unsigned char) val);
+  return ((unsigned char)val);
 }
 
 unsigned char
@@ -118,14 +118,14 @@ outonly (unsigned char c, FILE *fp_out)
   int out;
   int val;
 
-  val = (int) c;
+  val = (int)c;
   if ((out = fputc(val, fp_out)) == EOF)
   {
     fprintf (stderr, "%s: %s couln't be written\n", prog, file_out);
     exit (1);
   }
 
-  return ((unsigned char) val);
+  return ((unsigned char)val);
 }
 
 int main (int argc, char * argv[]) {
@@ -136,32 +136,32 @@ int main (int argc, char * argv[]) {
   unsigned char b;
   unsigned int csum = 0;
   unsigned int crc = 0;
-  char chnk [5];
+  char chnk[5];
   int l;
   int i;
 
   if (argc < 3)
   {
-    printf ("usage: %s <filein> <fileout>\n", argv[0]);
-    exit (1);
+    printf("usage: %s <filein> <fileout>\n", argv[0]);
+    exit(1);
   }
   else
   {
-    strcpy (prog, argv[0]);
-    strcpy (file_in, argv[1]);
-    strcpy (file_out, argv[2]);
+    strcpy(prog, argv[0]);
+    strcpy(file_in, argv[1]);
+    strcpy(file_out, argv[2]);
   }
 
-  if ((fp_in = fopen (argv[1], "rb")) == NULL)
+  if ((fp_in = fopen(argv[1], "rb")) == NULL)
   {
-    fprintf (stderr, "%s: %s not found\n", argv[0], argv[1]);
-    exit (1);
+    fprintf(stderr, "%s: %s not found\n", argv[0], argv[1]);
+    exit(1);
   }
    
-  if ((fp_out = fopen (argv[2], "wb")) == NULL)
+  if ((fp_out = fopen(argv[2], "wb")) == NULL)
   {
-    fprintf (stderr, "%s: %s can't be created\n", argv[0], argv[2]);
-    exit (1);
+    fprintf(stderr, "%s: %s can't be created\n", argv[0], argv[2]);
+    exit(1);
   }
    
   // copy PNG header
@@ -169,50 +169,50 @@ int main (int argc, char * argv[]) {
   {
     if ((val = fgetc(fp_in)) == EOF)
     {
-      fprintf (stderr, "%s: %s too short\n", argv[0], argv[1]);
-      exit (1);
+      fprintf(stderr, "%s: %s too short\n", argv[0], argv[1]);
+      exit(1);
     }
     else
     {
-      fputc (val, fp_out);
+      fputc(val, fp_out);
 
-      if (val != (int) png_sig[i])
+      if (val != (int)png_sig[i])
       {
-        fprintf (stderr, "%s: PNG signature error in %s (byte %d)\n", argv[0], argv[1], i);
-        exit (1);
+        fprintf(stderr, "%s: PNG signature error in %s (byte %d)\n", argv[0], argv[1], i);
+        exit(1);
       }
     }
   }
 
   // process chunks
-  strcpy (chnk, "");
+  strcpy(chnk, "");
   do
   {
     // get chunk size
     l = 0;
     for (i = 0; i < 4; i++)
     {
-      c = inout (fp_in, fp_out);
+      c = inout(fp_in, fp_out);
       l = (l << 8) + c;
     }
 
     // get chunk name
     crc = 0;
-    strcpy (chnk, "");
+    strcpy(chnk, "");
     for (i = 0; i < 4; i++)
     {
-      c = inout (fp_in, fp_out);
+      c = inout(fp_in, fp_out);
       crc = crc32 (crc, &c, 1);
-      chnk[i] = (char) c;
+      chnk[i] = (char)c;
     }
     chnk[4] = '\0';
 
-    printf ("%s (%3d )", chnk, l);
+    printf("%s (%3d )", chnk, l);
 
     // copy chunk data
     for (i = 0; i < l; i++)
     {
-      c = inout (fp_in, fp_out);
+      c = inout(fp_in, fp_out);
       crc = crc32 (crc, &c, 1);
     }
 
@@ -220,24 +220,24 @@ int main (int argc, char * argv[]) {
     csum = 0;
     for (i = 0; i < 4; i++)
     {
-      c = inonly (fp_in);
-      csum = (csum << 8) + (int) c;
+      c = inonly(fp_in);
+      csum = (csum << 8) + (int)c;
 
-      b = (unsigned char) ((crc >> 8 * (3 - i)) & 0xFF);
-      // printf ("b = %02x\n", b);
+      b = (unsigned char)((crc >> 8 * (3 - i)) & 0xFF);
+      // printf("b = %02x\n", b);
 
-      outonly (b, fp_out);
+      outonly(b, fp_out);
     }
 
     if (crc == csum)
-      printf (" - csum = %08x\n", crc);
+      printf(" - csum = %08x\n", crc);
     else
-      printf (" - csum = %08x -> %08x\n", csum, crc);
+      printf(" - csum = %08x -> %08x\n", csum, crc);
 
   }
-  while (strcmp (chnk, "IEND") != 0);
+  while (strcmp(chnk, "IEND") != 0);
 
-  fclose (fp_in);
+  fclose(fp_in);
 
   return 0;
 }
