@@ -1,0 +1,5 @@
+*.o
+*.bak
+crc16
+pngcsum
+
