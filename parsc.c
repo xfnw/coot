@@ -14,7 +14,7 @@ void doline(char *line) {
 
 	do {
 		stok(cmd, NULL, " \n");
-	} while (*cmd>>6 != 1); /* go until letter */
+	} while (*cmd>>5 != 2); /* go until capital letter */
 
 	if (!strcmp("KILL", cmd)) {
 		/* use name from KILL parameter */
