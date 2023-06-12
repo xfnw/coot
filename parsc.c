@@ -8,6 +8,7 @@
 
 void doline(char *line) {
 	char *name, *cmd;
+	char *newname = "";
 
 	stok(name, line, " :\n");
 
@@ -18,9 +19,11 @@ void doline(char *line) {
 	if (!strcmp("KILL", cmd)) {
 		/* use name from KILL parameter */
 		stok(name, NULL, " :\n");
+	} else if (!strcmp("NICK", cmd)) {
+		stok(newname, NULL, " :\n");
 	}
 
-	printf("%s %s\n", cmd, name);
+	printf("%s %s %s\n", cmd, name, newname);
 }
 
 int main() {
