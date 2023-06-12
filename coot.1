@@ -83,7 +83,7 @@ the options are as follows:
 the path of the input png file to correct
 .It Ar fileout
 the path to output the corrected png file
-.Ed
+.El
 .
 .Sh BUGS
 none :3
@@ -92,6 +92,17 @@ the term
 .Ql checksum
 is used throughout this manual to refer to the output of a crc,
 although this is technically incorrect.
+.
+.Sh EXAMPLES
+the
+.Nm crc16
+utility may be used to easily produce files with a checksum of 0,
+with the help of the
+.Xr tee 1
+program and some shell redirection.
+.Bd -literal -offset indent
+{ tee /dev/stderr <file | crc16 b } 2>&1 >newfile
+.Ed
 .
 .Sh AUTHORS
 .An xfnw Aq Mt xfnw@riseup.net
