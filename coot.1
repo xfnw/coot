@@ -5,7 +5,8 @@
 .Sh NAME
 .Nm crc16 ,
 .Nm pascal ,
-.Nm pngcsum
+.Nm pngcsum ,
+.Nm parsc
 .Nd random little c utilities
 .
 .Sh SYNOPSIS
@@ -18,6 +19,8 @@
 .Nm pngcsum
 .Ar filein
 .Ar fileout
+.
+.Nm parsc
 .
 .Sh DESCRIPTION
 random little utilities in C.
@@ -84,6 +87,15 @@ the path of the input png file to correct
 .It Ar fileout
 the path to output the corrected png file
 .El
+
+the
+.Nm parsc
+utility takes
+.Xr scirc 1
+log format in
+.Pa stdin
+and sends the affected user and command to
+.Pa stdout
 .
 .Sh EXAMPLES
 the

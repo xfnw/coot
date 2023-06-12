@@ -1,7 +1,9 @@
 *.o
 *.bak
 *.png
+*.html
 crc16
 pngcsum
 pascal
+parsc
 
