@@ -1,4 +1,4 @@
-.Dd June 10th, 2023
+.Dd June 11th, 2023
 .Dt coot 1
 .Os
 .
@@ -85,14 +85,6 @@ the path of the input png file to correct
 the path to output the corrected png file
 .El
 .
-.Sh BUGS
-none :3
-
-the term
-.Ql checksum
-is used throughout this manual to refer to the output of a crc,
-although this is technically incorrect.
-.
 .Sh EXAMPLES
 the
 .Nm crc16
@@ -104,11 +96,19 @@ program and some shell redirection.
 { tee /dev/stderr <file | crc16 b } 2>&1 >newfile
 .Ed
 .
-.Sh AUTHORS
-.An xfnw Aq Mt xfnw@riseup.net
-.
 .Sh HISTORY
 .Nm pngcsum
 was adapted from a c file floating around in various git
 repositories for CTF challenges and websites.
 it is unclear who wrote the original or where it came from.
+.
+.Sh AUTHORS
+.An xfnw Aq Mt xfnw@riseup.net
+.
+.Sh BUGS
+none :3
+
+the term
+.Ql checksum
+is used throughout this manual to refer to the output of a crc,
+although this is technically incorrect.
