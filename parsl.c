@@ -17,8 +17,9 @@ void json_escape_print(char *input) {
 	unsigned char colormode = 255;
 
 	while ((++outslice < out + LINELEN * 2) && *(++inslice)) {
-		if (*inslice < 0x1F) {
-			colormode = 0;
+		if (*inslice <= 0x1F) {
+			if (*inslice == 0x03)
+				colormode = 0;
 			outslice--; /* drop character */
 			continue;
 		}
