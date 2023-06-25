@@ -72,7 +72,7 @@ void doline(char *line) {
 
 	stok(topic, NULL, "\n");
 
-	printf("{\"count\":%010d,\"channel\":\"", count);
+	printf("{\"count\":%010d,\"name\":\"", count);
 	json_escape_print(channel);
 	fputs("\",\"topic\":\"", stdout);
 	json_escape_print(topic);
