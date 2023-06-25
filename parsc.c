@@ -1,10 +1,12 @@
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
-#define stok(varname, ptr, delim) varname = strtok(ptr, delim); \
-	if (varname == NULL) return
+#define stok(varname, ptr, delim)                                              \
+	varname = strtok(ptr, delim);                                          \
+	if (varname == NULL)                                                   \
+	return
 
 void doline(char *line) {
 	char *name, *cmd;
@@ -14,7 +16,7 @@ void doline(char *line) {
 
 	do {
 		stok(cmd, NULL, " \n");
-	} while (*cmd>>5 != 2); /* go until capital letter */
+	} while (*cmd >> 5 != 2); /* go until capital letter */
 
 	if (!strcmp("KILL", cmd)) {
 		/* use name from KILL parameter */
@@ -37,4 +39,3 @@ int main() {
 
 	free(linebuf);
 }
-

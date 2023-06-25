@@ -1,8 +1,9 @@
+#include <arpa/inet.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <arpa/inet.h>
 
-unsigned short crc16_1021(unsigned short state, unsigned char *data, ssize_t len) {
+unsigned short crc16_1021(unsigned short state, unsigned char *data,
+			  ssize_t len) {
 	while (len--) {
 		unsigned char x;
 
@@ -19,26 +20,24 @@ int main(int argc, char *argv[]) {
 	unsigned char buf[8192];
 	ssize_t len;
 
-	while ((len = read(STDIN_FILENO, buf, sizeof(buf)-1))) {
+	while ((len = read(STDIN_FILENO, buf, sizeof(buf) - 1))) {
 		state = crc16_1021(state, buf, len);
 	}
 
 	char outfmt = 'x';
 	if (argc > 1)
 		outfmt = *argv[1];
-	
+
 	switch (outfmt) {
-		break; case 'b':
-			state = htons(state);
-			write(STDOUT_FILENO, &state, 2);
-		break; case 'd':
-			printf("%hd\n", (short)state);
-		break; case 'D':
-			printf("%hu\n", state);
-		break; case 'x':
-			printf("%04x\n", state);
-		break; default:
-			printf("b d %hd D %hu x %04x\n", (short)state, state, state);
+	case 'b':
+		state = htons(state);
+		write(STDOUT_FILENO, &state, 2);
+		break;
+	case 'd': printf("%hd\n", (short)state); break;
+	case 'D': printf("%hu\n", state); break;
+	case 'x': printf("%04x\n", state); break;
+	default:
+		printf("b d %hd D %hu x %04x\n", (short)state, state, state);
+		break;
 	}
 }
-
