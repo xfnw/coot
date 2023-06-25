@@ -11,12 +11,12 @@
 	return
 
 void json_escape_print(char *input) {
-	char out[LINELEN*2] = "";
-	char *outslice = out-1;
-	char *inslice = input-1;
+	char out[LINELEN * 2] = "";
+	char *outslice = out - 1;
+	char *inslice = input - 1;
 	unsigned char colormode = 255;
 
-	while ((++outslice < out + LINELEN*2) && *(++inslice)) {
+	while ((++outslice < out + LINELEN * 2) && *(++inslice)) {
 		if (*inslice < 0x1F) {
 			colormode = 0;
 			outslice--; /* drop character */
@@ -25,7 +25,8 @@ void json_escape_print(char *input) {
 		/* FIXME: broken variable length color behavior
 		 * ^C1,234567 should be 567 not 7 */
 		if (colormode < 7) {
-			if (*inslice == ',' || (*inslice >= '0' && *inslice <= '9')) {
+			if (*inslice == ',' ||
+			    (*inslice >= '0' && *inslice <= '9')) {
 				colormode++;
 				outslice--; /* drop character */
 				continue;
