@@ -2,7 +2,7 @@ CFLAGS ?= -O3
 PREFIX ?= /usr/local
 BINDIR ?= ${PREFIX}/bin
 
-all: crc16 pngcsum pascal parsc parsl
+all: crc16 pngcsum pascal parsc parsl cmul
 
 install: all
 	install crc16 ${DESTDIR}${BINDIR}
@@ -10,6 +10,7 @@ install: all
 	install pascal ${DESTDIR}${BINDIR}
 	install parsc ${DESTDIR}${BINDIR}
 	install parsl ${DESTDIR}${BINDIR}
+	install cmul ${DESTDIR}${BINDIR}
 
 uninstall:
 	rm -f \
@@ -17,8 +18,9 @@ uninstall:
 		${DESTDIR}${BINDIR}/pngcsum \
 		${DESTDIR}${BINDIR}/pascal  \
 		${DESTDIR}${BINDIR}/parsc   \
-		${DESTDIR}${BINDIR}/parsl
+		${DESTDIR}${BINDIR}/parsl   \
+		${DESTDIR}${BINDIR}/cmul
 
 clean:
-	rm -f crc16 pngcsum pascal parsc parsl
+	rm -f crc16 pngcsum pascal parsc parsl cmul
 
