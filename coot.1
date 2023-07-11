@@ -1,4 +1,4 @@
-.Dd June 11th, 2023
+.Dd July 10th, 2023
 .Dt coot 1
 .Os
 .
@@ -6,7 +6,8 @@
 .Nm crc16 ,
 .Nm pascal ,
 .Nm pngcsum ,
-.Nm parsc
+.Nm parsc ,
+.Nm cmul
 .Nd random little c utilities
 .
 .Sh SYNOPSIS
@@ -21,6 +22,11 @@
 .Ar fileout
 .
 .Nm parsc
+.
+.Nm cmul
+.Ar operation
+.Ar x
+.Ar y
 .
 .Sh DESCRIPTION
 random little utilities in C.
@@ -96,6 +102,35 @@ log format in
 .Pa stdin
 and sends the affected user and command to
 .Pa stdout
+
+the
+.Nm cmul
+utility calculates the greatest common divisor
+or least common multiple of two numbers.
+
+the options are as follows:
+.Bl -tag -width Ds
+.It Ar operation
+supported operations include
+.Cm gcd
+(greatest common divisor) and
+.Cm lcm
+(lowest common multiple).
+
+note only the first letter is considered, so
+.Cm g
+and
+.Cm l
+would work as well.
+.It Ar x
+the first integer to do
+.Ar operation
+on
+.It Ar y
+the second integer to do
+.Ar operation
+on
+.El
 .
 .Sh EXAMPLES
 the
