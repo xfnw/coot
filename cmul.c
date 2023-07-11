@@ -20,7 +20,7 @@ long least_common_multiple(long x, long y) {
 
 int main(int argc, char *argv[]) {
 	if (argc != 4) {
-		printf("usage: {} operation x y\n", *argv);
+		printf("usage: %s operation x y\n", *argv);
 		return 1;
 	}
 
