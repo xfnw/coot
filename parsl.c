@@ -81,8 +81,8 @@ void doline(char *line) {
 }
 
 int main() {
-	char *linebuf = malloc(1024);
-	ssize_t linesize = 1024;
+	char *linebuf = malloc(LINELEN + 1);
+	ssize_t linesize = LINELEN + 1;
 
 	while (getline(&linebuf, &linesize, stdin) != -1) {
 		char *line = linebuf;
