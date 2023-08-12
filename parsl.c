@@ -24,8 +24,8 @@ void json_escape_print(char *input) {
 			continue;
 		}
 		/* FIXME: broken variable length color behavior
-		 * ^C1,234567 should be 567 not 7 */
-		if (colormode < 7) {
+		 * ^C1,2345 should be 45 not 5 */
+		if (colormode < 5) {
 			if (*inslice == ',' ||
 			    (*inslice >= '0' && *inslice <= '9')) {
 				colormode++;
