@@ -19,12 +19,15 @@ int main(int argc, const char *argv[]) {
 		case '!':
 		case '/':
 		case '-': not ^= 1; break;
+		/* we map '1' to 0 and so on */
 		case '1' ... '5': place = c - 49; break;
 		case 'a' ... 'z':
 			k = 0;
 
 			if (place == -1) {
 				for (i = 0; i < len; i++) {
+					/* misuse xor for not's
+					 * conditional negation */
 					if ((strchr(words[i], c) != NULL) ^
 					    not )
 						work[k++] = words[i];
@@ -41,7 +44,7 @@ int main(int argc, const char *argv[]) {
 			len = k;
 			memcpy(words, work, len * sizeof(&words));
 			break;
-		default: printf("what %c\n", c); return 2;
+		default: printf("unknown symbol %c\n", c); return 2;
 		}
 	}
 
