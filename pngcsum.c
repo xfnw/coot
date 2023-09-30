@@ -104,7 +104,7 @@ unsigned char outonly(unsigned char c, FILE *fp_out) {
 	return ((unsigned char)val);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, const char *argv[]) {
 	FILE *fp_in;
 	FILE *fp_out;
 	unsigned char c;

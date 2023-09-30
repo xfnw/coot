@@ -46,7 +46,6 @@ void json_escape_print(char *input) {
 
 void doline(char *line) {
 	char *name, *cmd, *channel, *countstr, *topic;
-	char *newname = "";
 	int count;
 
 	stok(name, line, ":\n");

@@ -2,10 +2,8 @@
 #include <stdlib.h>
 
 long greatest_common_divisor(long x, long y) {
-	long z;
-
 	while (y) {
-		z = x % y;
+		long z = x % y;
 
 		x = y;
 		y = z;
@@ -18,7 +16,7 @@ long least_common_multiple(long x, long y) {
 	return x / greatest_common_divisor(x, y) * y;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, const char *argv[]) {
 	if (argc != 4) {
 		printf("usage: %s operation x y\n", *argv);
 		return 1;

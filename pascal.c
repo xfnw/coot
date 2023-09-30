@@ -22,7 +22,7 @@ long unsigned int pascal_triangle_nth(int row, int x) {
 	return factorial(row) / (factorial(row - x) * factorial(x));
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, const char *argv[]) {
 	int scale = 3;
 	int offset = 0;
 
