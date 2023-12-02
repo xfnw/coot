@@ -3,9 +3,9 @@
 #include <string.h>
 #include <unistd.h>
 
-#define stok(varname, ptr, delim)                                              \
-	varname = strtok(ptr, delim);                                          \
-	if (varname == NULL)                                                   \
+#define stok(varname, ptr, delim) \
+	varname = strtok(ptr, delim); \
+	if (varname == NULL) \
 	return
 
 void doline(char *line) {

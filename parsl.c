@@ -5,9 +5,9 @@
 
 #define LINELEN 512
 
-#define stok(varname, ptr, delim)                                              \
-	varname = strtok(ptr, delim);                                          \
-	if (varname == NULL)                                                   \
+#define stok(varname, ptr, delim) \
+	varname = strtok(ptr, delim); \
+	if (varname == NULL) \
 	return
 
 void json_escape_print(char *input) {
