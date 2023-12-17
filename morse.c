@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -13,12 +14,17 @@
 	SW { DR(d) }
 
 char *morseify(char c) {
-	switch (c | 32) {
+	switch (isupper(c) ? c | 32 : c) {
 	case '!': return "-.-.-- "; break;
 	case '"': return ".-..-. "; break;
+	case '#': return "....-- "; break;
+	case '$': return "...-..- "; break;
+	case '%': return ".--..-. "; break;
+	case '&': return ".-... "; break;
 	case '\'': return ".----. "; break;
 	case '(': return "-.--. "; break;
 	case ')': return "-.--.- "; break;
+	case '*': return "-.-.- "; break;
 	case '+': return ".-.-. "; break;
 	case ',': return "--..-- "; break;
 	case '-': return "-....- "; break; /* unreachable if first */
@@ -36,9 +42,15 @@ char *morseify(char c) {
 	case '9': return "----. "; break;
 	case ':': return "---... "; break;
 	case ';': return "-.-.-. "; break;
+	case '<': return "--.-- "; break;
 	case '=': return "-...- "; break;
+	case '>': return "--.--. "; break;
 	case '?': return "..--.. "; break;
 	case '@': return ".--.-. "; break;
+	case '[': return "..-.. "; break;
+	case '\\': return ".-..- "; break;
+	case ']': return "..-..- "; break;
+	case '^': return ".--.--- "; break;
 	case '_': return "..--.- "; break;
 	case 'a': return ".- "; break;
 	case 'b': return "-... "; break;
@@ -66,6 +78,10 @@ char *morseify(char c) {
 	case 'x': return "-..- "; break;
 	case 'y': return "-.-- "; break;
 	case 'z': return "--.. "; break;
+	case '{': return ".--.- "; break;
+	case '|': return ".--... "; break;
+	case '}': return ".--.-- "; break;
+	case '~': return "...--.- "; break;
 	default: return NULL;
 	}
 }
@@ -114,18 +130,32 @@ int main() {
 								}
 						}
 						break;
-					case '-': DO('4');
+					case '-':
+						SW { DR('4')
+						case '-': DO('#')
+						}
 					}
 					break;
 				case '-':
 					SW { DR('v')
 					case '.':
 						SW { DG(fputs("VERIFY ", stdout);)
+						case '.':
+							SW { DG(;)
+							case '-': DO('$');
+							}
+							break;
 						case '-':
 							SW { DG(fputs("GOODBYE ", stdout);) }
 						}
 						break;
-					case '-': DO('3');
+					case '-':
+						SW { DR('3')
+						case '.':
+							SW { DG(;)
+							case '-': DO('~')
+							}
+						}
 					}
 				}
 				break;
@@ -133,6 +163,11 @@ int main() {
 				SW { DR('u')
 				case '.':
 					SW { DR('f')
+					case '.':
+						SW { DR('[')
+						case '-': DO(']')
+						}
+						break;
 					case '-':
 						SW { DG(fputs("PLS RPT", stdout);) }
 					}
@@ -157,11 +192,9 @@ int main() {
 				SW { DR('r')
 				case '.':
 					SW { DR('l')
-					case '.':
-						SW { DG(fputs("WAIT ", stdout);) }
-						break;
+					case '.': DO('&'); break;
 					case '-':
-						SW { DG(;)
+						SW { DR('\\')
 						case '.': DO('"')
 						}
 					}
@@ -179,9 +212,22 @@ int main() {
 				SW { DR('w')
 				case '.':
 					SW { DR('p')
-					case '-':
+					case '.':
 						SW { DG(;)
-						case '.': DO('@')
+						case '.': DO('|'); break;
+						case '-':
+							SW { DG(;)
+							case '.': DO('%')
+							}
+						}
+						break;
+					case '-':
+						SW { DR('{')
+						case '.': DO('@'); break;
+						case '-':
+							SW { DR('}')
+							case '-': DO('^')
+							}
 						}
 					}
 					break;
@@ -222,7 +268,7 @@ int main() {
 				case '.':
 					SW { DR('c')
 					case '-':
-						SW { DG(fputs("BGN MSGS ", stdout);)
+						SW { DR('*')
 						case '.': DO(';'); break;
 						case '-': DO('!')
 						}
@@ -251,7 +297,13 @@ int main() {
 						}
 					}
 					break;
-				case '-': DO('q')
+				case '-':
+					SW { DR('q')
+					case '-':
+						SW { DR('<')
+						case '.': DO('>')
+						}
+					}
 				}
 				break;
 			case '-':
