@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define SW switch (c = getchar())
 #define DG(d) \
@@ -6,14 +7,78 @@
 	case ' ': d goto new; \
 	case '\n': d putchar('\n'); goto new; \
 	case '/': d putchar(' '); goto new; \
-	default: fputs(morseify(c),stdout); goto new;
+	default: tomorse(c); goto new;
 #define DR(d) DG(putchar(d););
-#define DO(d) SW { DR(d) }
+#define DO(d) \
+	SW { DR(d) }
 
 char *morseify(char c) {
-	switch (c|32) {
+	switch (c | 32) {
+	case '+': return ".-.-. "; break;
+	case ',': return "--..-- "; break;
+	case '-': return "-....- "; break; /* unreachable if first */
+	case '.': return ".-.-.- "; break; /* same here */
+	case '/': return "-..-. "; break;
+	case '0': return "----- "; break;
+	case '1': return ".---- "; break;
+	case '2': return "..--- "; break;
+	case '3': return "...-- "; break;
+	case '4': return "....- "; break;
+	case '5': return "..... "; break;
+	case '6': return "-.... "; break;
+	case '7': return "--... "; break;
+	case '8': return "---.. "; break;
+	case '9': return "----. "; break;
+	case '=': return "-...- "; break;
+	case '?': return "..--.. "; break;
+	case '@': return ".--.-. "; break;
 	case 'a': return ".- "; break;
-	default: return "ERR ";
+	case 'b': return "-... "; break;
+	case 'c': return "-.-. "; break;
+	case 'd': return "-.. "; break;
+	case 'e': return ". "; break;
+	case 'f': return "..-. "; break;
+	case 'g': return "--. "; break;
+	case 'h': return ".... "; break;
+	case 'i': return ".. "; break;
+	case 'j': return ".--- "; break;
+	case 'k': return "-.- "; break;
+	case 'l': return ".-.. "; break;
+	case 'm': return "-- "; break;
+	case 'n': return "-. "; break;
+	case 'o': return "--- "; break;
+	case 'p': return ".--. "; break;
+	case 'q': return "--.- "; break;
+	case 'r': return ".-. "; break;
+	case 's': return "... "; break;
+	case 't': return "- "; break;
+	case 'u': return "..- "; break;
+	case 'v': return "...- "; break;
+	case 'w': return ".-- "; break;
+	case 'x': return "-..- "; break;
+	case 'y': return "-.-- "; break;
+	case 'z': return "--.. "; break;
+	default: return NULL;
+	}
+}
+
+void tomorse(char c) {
+	for (;;) {
+		if (c == EOF)
+			exit(0);
+
+		char *out = morseify(c);
+		if (out == NULL) {
+			switch (c) {
+			case ' ': out = " / "; break;
+			case '\n': out = "\n"; break;
+			default: out = "ERR "; break;
+			}
+			fputs(out, stdout);
+			return;
+		}
+		fputs(out, stdout);
+		c = getchar();
 	}
 }
 
@@ -49,7 +114,7 @@ int main() {
 					case '.':
 						SW { DG(fputs("VERIFY ", stdout);)
 						case '-':
-							SW { DG(fputs("END WORK ", stdout);) }
+							SW { DG(fputs("GOODBYE ", stdout);) }
 						}
 						break;
 					case '-': DO('3');
@@ -58,7 +123,12 @@ int main() {
 				break;
 			case '-':
 				SW { DR('u')
-				case '.': DO('f'); break;
+				case '.':
+					SW { DR('f')
+					case '-':
+						SW { DG(fputs("PLS RPT", stdout);) }
+					}
+					break;
 				case '-':
 					SW { DG(;)
 					case '.':
