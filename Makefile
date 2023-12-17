@@ -2,7 +2,7 @@ CFLAGS ?= -O3
 PREFIX ?= /usr/local
 BINDIR ?= ${PREFIX}/bin
 
-all: crc16 pngcsum pascal parsc parsl cmul words
+all: crc16 pngcsum pascal parsc parsl cmul words morse
 
 install: all
 	install crc16 ${DESTDIR}${BINDIR}
@@ -12,6 +12,7 @@ install: all
 	install parsl ${DESTDIR}${BINDIR}
 	install cmul ${DESTDIR}${BINDIR}
 	install words ${DESTDIR}${BINDIR}
+	install morse ${DESTDIR}${BINDIR}
 
 uninstall:
 	rm -f \
@@ -21,9 +22,10 @@ uninstall:
 		${DESTDIR}${BINDIR}/parsc   \
 		${DESTDIR}${BINDIR}/parsl   \
 		${DESTDIR}${BINDIR}/cmul    \
-		${DESTDIR}${BINDIR}/words
+		${DESTDIR}${BINDIR}/words   \
+		${DESTDIR}${BINDIR}/morse
 
 clean:
 	rm -f crc16 pngcsum pascal parsc \
-		parsl cmul words
+		parsl cmul words morse
 

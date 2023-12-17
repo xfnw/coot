@@ -2,6 +2,7 @@
 *.bak
 *.png
 *.html
+tags
 crc16
 pngcsum
 pascal
@@ -9,4 +10,5 @@ parsc
 parsl
 cmul
 words
+morse
 
