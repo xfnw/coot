@@ -14,11 +14,16 @@
 
 char *morseify(char c) {
 	switch (c | 32) {
+	case '!': return "-.-.-- "; break;
+	case '"': return ".-..-. "; break;
+	case '\'': return ".----. "; break;
+	case '(': return "-.--. "; break;
+	case ')': return "-.--.- "; break;
 	case '+': return ".-.-. "; break;
 	case ',': return "--..-- "; break;
 	case '-': return "-....- "; break; /* unreachable if first */
 	case '.': return ".-.-.- "; break; /* same here */
-	case '/': return "-..-. "; break;
+	case '/': return "-..-. "; break;  /* me too */
 	case '0': return "----- "; break;
 	case '1': return ".---- "; break;
 	case '2': return "..--- "; break;
@@ -29,9 +34,12 @@ char *morseify(char c) {
 	case '7': return "--... "; break;
 	case '8': return "---.. "; break;
 	case '9': return "----. "; break;
+	case ':': return "---... "; break;
+	case ';': return "-.-.-. "; break;
 	case '=': return "-...- "; break;
 	case '?': return "..--.. "; break;
 	case '@': return ".--.-. "; break;
+	case '_': return "..--.- "; break;
 	case 'a': return ".- "; break;
 	case 'b': return "-... "; break;
 	case 'c': return "-.-. "; break;
@@ -133,7 +141,8 @@ int main() {
 					SW { DG(;)
 					case '.':
 						SW { DG(;)
-						case '.': DO('?');
+						case '.': DO('?'); break;
+						case '-': DO('_')
 						}
 						break;
 					case '-':
