@@ -2,7 +2,7 @@ CFLAGS ?= -O3
 PREFIX ?= /usr/local
 BINDIR ?= ${PREFIX}/bin
 
-OBJS += crc16 pngcsum pascal parsc parsl cmul words morse
+OBJS += cmul crc16 luhn morse parsc parsl pascal pngcsum words
 
 all: ${OBJS}
 

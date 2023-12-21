@@ -3,12 +3,13 @@
 *.png
 *.html
 tags
+cmul
 crc16
-pngcsum
-pascal
+luhn
+morse
 parsc
 parsl
-cmul
+pascal
+pngcsum
 words
-morse
 
