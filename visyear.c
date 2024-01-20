@@ -15,7 +15,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#define W 64
+#define W 56
 #define H 8
 
 #define BLOX_RW W / 4
