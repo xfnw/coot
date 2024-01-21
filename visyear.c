@@ -37,7 +37,7 @@ int main() {
 	size_t size;
 
 	while (-1 != getline(&line, &size, stdin)) {
-		char *fst = strtok(line, " \r\n");
+		char *fst = strtok(line, " T\r\n");
 
 		memset(t, 0, sizeof(t));
 		strptime(fst, "%Y-%m-%d", t);
