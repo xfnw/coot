@@ -29,10 +29,6 @@ int main() {
 	struct tm *t = localtime(&now);
 	int days = 364 + t->tm_wday;
 
-	/* avoid segfaulting on sundays */
-	if (days < 365)
-		days += 7;
-
 	char *line = NULL;
 	size_t size;
 
