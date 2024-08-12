@@ -2,6 +2,7 @@
 *.bak
 *.png
 *.html
+*.wasm
 tags
 cmul
 crc16
