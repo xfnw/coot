@@ -11,7 +11,7 @@ int main(int argc, const char *argv[]) {
 	int t = 0;
 
 	for (int i = 0; i < len; i++) {
-		int s = (p[i] - '0') << (i & 1 ^ o);
+		int s = (p[i] - '0') << ((i & 1) ^ o);
 		t += s / 10 + (s % 10);
 	}
 
