@@ -30,7 +30,7 @@ void doline(char *line) {
 
 int main() {
 	char *linebuf = malloc(1024);
-	ssize_t linesize = 1024;
+	size_t linesize = 1024;
 
 	while (getline(&linebuf, &linesize, stdin) != -1) {
 		char *line = linebuf;
