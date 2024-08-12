@@ -24,7 +24,7 @@
 #include "blox.h"
 
 int main() {
-	unsigned char frame[BLOX_RW * BLOX_RH] = { 0 };
+	unsigned char frame[BLOX_RW * BLOX_RH] = {0};
 	time_t now = time(NULL);
 	struct tm *t = localtime(&now);
 	int days = 364 + t->tm_wday;
@@ -35,7 +35,7 @@ int main() {
 	while (-1 != getline(&line, &size, stdin)) {
 		char *fst = strtok(line, " T\r\n");
 
-		memset(t, 0, sizeof(t));
+		memset(t, 0, sizeof(*t));
 		strptime(fst, "%Y-%m-%d", t);
 		int ago = (int)((now - mktime(t)) / 86400);
 
