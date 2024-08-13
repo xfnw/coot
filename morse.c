@@ -94,7 +94,7 @@ void tomorse(char c) {
 		char *out = morseify(c);
 		if (out == NULL) {
 			switch (c) {
-			case ' ': out = " / "; break;
+			case ' ': out = "/ "; break;
 			case '\n': out = "\n"; break;
 			default: out = "ERR "; break;
 			}
