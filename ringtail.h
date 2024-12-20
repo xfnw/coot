@@ -29,14 +29,14 @@ int ringtail_buf_free(char *buf, size_t size) {
 
 struct ringtail {
 	char *buf;
-	size_t size;
-	size_t inp;
-	size_t out;
+	ssize_t size;
+	ssize_t inp;
+	ssize_t out;
 };
 
-void ringtail_init(struct ringtail *ring, ssize_t size) {
-	ring->buf = ringtail_buf_create(size);
-	ring->size = size;
+void ringtail_init(struct ringtail *ring, size_t size) {
+	ring->size = getpagesize() << size;
+	ring->buf = ringtail_buf_create(ring->size);
 	ring->inp = 0;
 	ring->out = 0;
 }
@@ -46,8 +46,8 @@ int ringtail_free(struct ringtail *ring) {
 }
 
 int ringtail_read(struct ringtail *ring, int fd) {
-	ring->inp = ring->inp % ring->size;
-	size_t space = (ring->size + ring->out - ring->inp) % ring->size;
+	ring->inp &= ring->size - 1;
+	size_t space = (ring->out - ring->inp) & (ring->size - 1);
 	if (space == 0)
 		space = ring->size;
 
@@ -59,8 +59,8 @@ int ringtail_read(struct ringtail *ring, int fd) {
 }
 
 char *ringtail_getline(struct ringtail *ring) {
-	ring->out = ring->out % ring->size;
-	size_t space = (ring->size + ring->inp - ring->out) % ring->size;
+	ring->out &= ring->size - 1;
+	size_t space = (ring->inp - ring->out) & (ring->size - 1);
 
 	char *start = ring->buf + ring->out;
 	char *newline = memchr(start, '\n', space);
