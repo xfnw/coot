@@ -23,7 +23,7 @@
 
 #include "blox.h"
 
-int main() {
+int main(void) {
 	unsigned char frame[BLOX_RW * BLOX_RH] = {0};
 	time_t now = time(NULL);
 	struct tm *t = localtime(&now);

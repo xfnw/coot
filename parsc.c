@@ -28,7 +28,7 @@ void doline(char *line) {
 	printf("%s %s %s\n", cmd, name, newname);
 }
 
-int main() {
+int main(void) {
 	char *linebuf = malloc(1024);
 	size_t linesize = 1024;
 

@@ -79,7 +79,7 @@ void doline(char *line) {
 	fputs("\"}\n", stdout);
 }
 
-int main() {
+int main(void) {
 	char *linebuf = malloc(LINELEN + 1);
 	size_t linesize = LINELEN + 1;
 

@@ -106,7 +106,7 @@ void tomorse(char c) {
 	}
 }
 
-int main() {
+int main(void) {
 	char c;
 
 	/* clang-format off */
