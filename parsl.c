@@ -10,10 +10,10 @@
 	if (varname == NULL) \
 	return
 
-void json_escape_print(char *input) {
+void json_escape_print(const char *input) {
 	char out[LINELEN * 2] = "";
 	char *outslice = out - 1;
-	char *inslice = input - 1;
+	const char *inslice = input - 1;
 	unsigned char colormode = 255;
 
 	while ((++outslice < out + LINELEN * 2) && *(++inslice)) {
@@ -45,7 +45,7 @@ void json_escape_print(char *input) {
 }
 
 void doline(char *line) {
-	char *name, *cmd, *channel, *countstr, *topic;
+	const char *name, *cmd, *channel, *countstr, *topic;
 	int count;
 
 	stok(name, line, ":\n");

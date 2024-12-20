@@ -9,8 +9,8 @@
 	return
 
 void doline(char *line) {
-	char *name, *cmd;
-	char *newname = "";
+	const char *name, *cmd;
+	const char *newname = "";
 
 	stok(name, line, " :\n");
 

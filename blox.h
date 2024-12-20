@@ -10,7 +10,7 @@
 
 const char *blox_disp_chars[] = {" ", "▀", "▄", "█"};
 
-void blox_draw(unsigned char *frame) {
+void blox_draw(const unsigned char *frame) {
 	unsigned short fx, fy;
 	for (fy = 0; fy < BLOX_RH; fy++) {
 		for (fx = 0; fx < BLOX_RW; fx++) {
@@ -33,6 +33,6 @@ void blox_del(unsigned char *frame, unsigned short x, unsigned short y) {
 	frame[BLOX_RW * (y >> 1) + x / 4] &= ~(1 << ((x % 4) * 2 + (y & 1)));
 }
 
-bool blox_get(unsigned char *frame, unsigned short x, unsigned short y) {
+bool blox_get(const unsigned char *frame, unsigned short x, unsigned short y) {
 	return frame[BLOX_RW * (y >> 1) + x / 4] & 1 << ((x % 4) * 2 + (y & 1));
 }

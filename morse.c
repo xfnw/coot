@@ -91,7 +91,7 @@ void tomorse(char c) {
 		if (c == EOF)
 			exit(0);
 
-		char *out = morseify(c);
+		const char *out = morseify(c);
 		if (out == NULL) {
 			switch (c) {
 			case ' ': out = "/ "; break;
