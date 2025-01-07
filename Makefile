@@ -16,6 +16,9 @@ feedi: LDFLAGS=-lncursesw
 %.wasm: %.c
 	${WASMCC} ${WFLAGS} ${CFLAGS} -o $@ $<
 
+%: %.c
+	${CC} ${CFLAGS} -o $@ $< ${LDFLAGS}
+
 install: all
 	install ${OBJS} ${LOBJS} ${DESTDIR}${BINDIR}
 
