@@ -1,3 +1,4 @@
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
@@ -12,13 +13,20 @@ int main(void) {
 
 	char *line = NULL;
 	size_t len = 0, row = 0;
-	while (getline(&line, &len, stdin) != -1) {
+gloop:	while (getline(&line, &len, stdin) != -1) {
 		/* TODO: unicode support, irc formatting, line
 		 * wrapping */
 		addnstr(line, COLS);
 		row = (row + 1) % LINES;
 		mvhline(row, 0, '-', COLS);
 		refresh();
+	}
+	if (errno == EINTR) { /* probably got a SIGWINCH */
+		clearerr(stdin);
+		refresh();
+		mvhline(row, 0, '-', COLS);
+		refresh();
+		goto gloop;
 	}
 
 	free(line);
